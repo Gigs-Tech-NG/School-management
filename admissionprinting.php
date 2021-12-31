@@ -1,0 +1,167 @@
+<?php session_start();?><?php require("includes/constant.php"); ?> 
+
+<!doctype>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Depotter | Print Applicant Form </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="images/logo.png">
+    <!-- Normalize csss -->
+    <link rel="stylesheet" href="csss/normalize.css">
+    <!-- Main csss -->
+    <link rel="stylesheet" href="csss/main.css">
+    <!-- Bootstrap csss -->
+    <link rel="stylesheet" href="csss/bootstrap.min.css">
+    <!-- Fontawesome csss -->
+    <link rel="stylesheet" href="csss/all.min.css">
+    <!-- Flaticon csss -->
+    <link rel="stylesheet" href="fonts/flaticon.css">
+    <!-- Animate csss -->
+    <link rel="stylesheet" href="csss/animate.min.css">
+    <!-- Select 2 csss -->
+    <link rel="stylesheet" href="csss/select2.min.css">
+    <!-- Date Picker csss -->
+    <link rel="stylesheet" href="csss/datepicker.min.css">
+    <!-- Custom csss -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Modernize jsss -->
+    <script src="jsss/modernizr-3.6.0.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+   <script>
+$(document).ready(function() {
+	$('#state').change(function(){
+		var state= $(this).val();
+		$("#lga"wink.load("applicantform.php",{state:state, ajax: 'true'});
+	});
+});
+</script> 
+  <?php
+ if( $state == ""){
+          echo '<script> alert("Not Authorised")
+     window.location = "applicantdashboard.php";
+     </script>';
+      }
+    ?>  
+    
+    
+    
+    
+</head>
+<body style="background-color:whitesmoke; background-repeat: no-repeat;size: a4; background-image: url();size: a4;">
+    <form method="post" action="javascript:void(0);">
+	<button name="print" onclick="printPageArea('printableArea')">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+  <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+  <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+</svg></button>
+	</form>
+	<div class="container" style="margin-top:3%;width:100%">
+    <div id="printableArea">
+ <img src="images/logo.png" alt="logo" style="width:14%;float: left;"/>
+<center> <h1 style="font-family: monospace;">DEPOTTER COLLEGE OF HEALTH TECHNOLOGY</h1></center>
+<center>in the district ofKM2, Oru/ijebu-igbo Road Oru-ijebu Ogun State.<br/> email:info@depotterhealth.sch.ng * Contact: 08184752559, 08101197161</center><br>
+<h3 style="text-align:center;color:red">APPLICATION FORM FOR ADMISSION<h3/>
+<center>Session: 2021/2022</center>
+<div style="margin-bottom:4%">
+ <img src="img/<?php echo $passport;?>"  style="width: 15%; height: 25%; float: right;border:1px solid black;">
+                       </div>              
+<table class="table text-nowrap" style="">
+                                        <tbody>
+                                 
+                                           <tr>
+                                                <td>Surname :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo   $firstname;?></td>
+                                                    <!--<input type="text" style="border-left: none;border-right: none; border-top: none; border-bottom: 2px solid black; background: none;" /></td-->
+                                            </tr>
+                                           
+                                            <tr>
+                                                <td>Middle Name :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo  $middle ;?></td>
+                                                    <!--input type="text" style="border-left: none;border-right: none; border-top: none; border-bottom: 2px solid black; background: none;" /></td-->
+                                            </tr>
+                                             <tr>
+                                                <td>Lastname :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo $lastname ;?></td>
+                                                    <!--input type="text" style="border-left: none;border-right: none; border-top: none; border-bottom: 2px solid black; background: none;" /></td-->
+                                            </tr>
+                                            <tr>
+                                                <td>Phone Number :</td>
+                                                <td class="font-medium text-dark-medium"> <?php echo $phone ;?></td-->
+                                            </tr>
+
+
+                                            <tr>
+                                            
+                                                <td>First Choice :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo $firstchoice ;?></td-->
+                                            <!--/tr>
+                                            <tr-->
+                                                <td>Second Choice :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo $secondchoice  ;?></td-->
+                                            </tr>
+                                            <tr>
+                                            
+                                                <td>Date Of Birth :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo  $dbirth ;?></td-->
+                                            <!--/tr>
+                                            <tr-->
+                                                <td>Gender :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo $gender ;?></td-->
+                                            </tr>
+                                           
+                                             <tr>
+                                                <td>Email :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo  $email_val ;?></td-->
+                                            <!--/tr>
+                                            <tr-->
+                                            <td>Religion :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo  $religion ;?></td-->
+                                            </tr>
+                                                <td>Address :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo $address ;?></td-->
+                                            <!--/tr>
+                                            <tr-->
+                                                <td>State :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo $state ;?> State</td-->
+                                            </tr>
+                                            <tr>
+                                                <td>Local government :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo $local ;?></td-->
+                                            <!--/tr>
+                                            <tr-->
+                                                
+                                            <!--img src="img/logo.png" style="float: center; opacity: 0.2;"/-->
+                                                <td>Sponspor's Name :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo $fullnames ;?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sponspor's Address :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo $sponsoraddress ;?></td-->
+                                            <!--/tr>
+                                            <tr-->
+                                                <td>Sponspor's Phone Number :</td>
+                                                <td class="font-medium text-dark-medium"><?php echo $sponsorphone ;?></td-->
+                                            </tr>
+                                           
+                                           
+                                       </tbody>
+                  </div>                     </div>
+          </body> 
+          <script>
+		function printPageArea(areaID){
+    var printContent = document.getElementById(areaID);
+    var WinPrint = window.open('', '', 'width=900,height=650');
+    WinPrint.document.write(printContent.innerHTML);
+    WinPrint.document.close();
+    WinPrint.focus();
+    WinPrint.print();
+    WinPrint.close();
+}
+</script>
+</html>
