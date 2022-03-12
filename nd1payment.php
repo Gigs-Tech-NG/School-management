@@ -7,7 +7,7 @@ if (time()-$_SESSION['timeout'] > 1800){
   // echo "<script> location.href='forget.php' <script>";
 }
 if( $_SESSION['paymed'] !="true"){
-    echo"<script> location.href='stafflogin.php'  </script>";
+   echo"<script> location.href='stafflogin.php'  </script>";
 }
 
 ?>
@@ -66,10 +66,10 @@ if( $_SESSION['paymed'] !="true"){
     <link rel="stylesheet" href="style.css">
     <!-- Modernize jsss -->
     <script src="jsss/modernizr-3.6.0.min.js"></script>
-</head>
- <!-- Preloader Start Here -->
+</head><body>
+    <!-- Preloader Start Here -->
     <div id="preloader"></div>
-    <div id="wrapper" class="wrapper bg-ash">
+     <div id="wrapper" class="wrapper bg-ash">
          <!-- Header Menu Area Start Here -->
         <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
@@ -202,7 +202,7 @@ if( $_SESSION['paymed'] !="true"){
                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">
                             <i class="far fa-bell"></i>
-                            <div class="item-title d-md-none text-16 mg-l-10">UNCHECKED BOOKINGS</div>
+                            <div class="item-title d-md-none text-16 mg-l-10"><h1>UNCHECKED BOOKINGS</h1></div>
                             <span> <?php include "config.php"; $select=mysqli_query($connection,"select * from hostel_request where status='' ");
                             $no = mysqli_num_rows($select); echo $no;?></span>
                         </a>
@@ -439,8 +439,7 @@ if( $_SESSION['paymed'] !="true"){
                         </li-->
                     </ul>
                 </div>
-            </div>
-             <?php 
+            </div> <?php 
   include "config.php";
       $select="SELECT * FROM paymentfee WHERE level='".$_SESSION['level']."' AND faculty='".$_SESSION['faculty']."'";
     $result=mysqli_query($connection, $select);
@@ -456,7 +455,7 @@ if( $_SESSION['paymed'] !="true"){
     }
 }if(!$amont){ 
     $_SESSION['pending']="SCHOOL FEE PENDING";
-     echo"<script> location.href='yearone.php'  </script>";
+    // echo"<script> location.href='yearthree.php'  </script>";
 }
     ?>
             <!-- Sidebar Area End Here -->
@@ -468,7 +467,7 @@ if( $_SESSION['paymed'] !="true"){
                         <li>
                             <a href="busary.php">Back</a>
                         </li>
-                        <li>Year1 <?php echo $faculty ;?> STUDENTS (<?php
+                        <li>Year3 <?php echo $faculty ;?> STUDENTS  (<?php
     date_default_timezone_set('Africa/Lagos');
     echo date('Y',time());?> )Session</li>
                     </ul>
@@ -481,17 +480,17 @@ if( $_SESSION['paymed'] !="true"){
                             <div class="item-title">
                                  <?php
     					include('config.php');
-    					$lvl=100;
-    					$quer=mysqli_query($connection,"SELECT fee FROM application WHERE level='$lvl'");
+    					$lvl=300;
+    					$quer=mysqli_query($connection,"SELECT fee_three FROM application WHERE level='$lvl'");
                         $total = 0;
     					while($row=mysqli_fetch_array($quer)){
     					   
-    					   $total += $row['fee'];
+    					   $total += $row['fee_three'];
                           
     					   }
                            $income =  $total; 
     						?>
-                                <h3>Year1 SCHOOL FEE Payment History Total Income: #<?php echo $income;?></h3>
+                                <h3>Year3 SCHOOL FEE Payment History Total Income: #<?php echo $income;?></h3>
                             </div>
                           
                         </div>
@@ -535,9 +534,9 @@ if( $_SESSION['paymed'] !="true"){
                                 </thead>
                                 <tbody>
                                     <tr>
-						 <form method="POST" action="receiptnd1.php" >
-              <td><input type="text" name="studentname" placeholder="Enter Surname and Middle name" required></td>
-                              <td><input type="text" class="cost" value="<?php echo $amont;?>" name="paymode" required></td>
+						 <form method="POST" action="receipthnd1.php" >
+                                     <td><input type="text" name="studentname" placeholder="Enter Surname and Middle name" required></td>
+                                         <td><input type="text" class="cost" value="<?php echo $amont;?>" name="paymode" required></td>
                                         <td><input type='text' value="<?php echo $level;?>"  disabled=""  required/> </td>
                                         <td><input type="tel"  placeholder ="e.g 10000" name="fee" required=""> </td><br><br>
                                         
@@ -596,7 +595,7 @@ $(document).ready(function(){
         var inputVal = $(this).val();
         var resultDropdown = $(this).siblings(".result");
         if(inputVal.length){
-            $.get("backened.php", {term: inputVal}).done(function(data){
+            $.get("backened3.php", {term: inputVal}).done(function(data){
                 // Display the returned data in browser
                 resultDropdown.html(data);
             });

@@ -78,18 +78,7 @@ session_start();
        }
     } ?>
        
-                 <?php
-                 
-         if(isset( $_SESSION['semester'])){
-       $sememster= 'FIRST TERM';
-       include "config.php";
-       $req=mysqli_query($connection,"SELECT * FROM semester WHERE id='$sememster'");
-       if(!$req){
-        
-       }while($row=mysqli_fetch_assoc($req)){
-        $semsteR=$row['name'];
-       }
-    } ?>
+                
     <?php
 if($_GET['score'] == ""){
     echo"<script> location.href='stafflogin.php'  </script>";
@@ -102,7 +91,7 @@ if (isset($_POST['update'])) {
  
 		$catext =mysqli_real_escape_string($connection,$_POST['catext']);
      	$examscr =mysqli_real_escape_string($connection,$_POST['examscr']);
-        if(( $semsteR) =='THIRD TERM'){
+        if(( $_SESSION['semester']) =='THIRD TERM'){
         $totalt3 =	$examscr + $catext ;
        $first=' ';
         $second=' ';
@@ -135,18 +124,19 @@ if (isset($_POST['update'])) {
      }
     } 
     
-    elseif(($semsteR =='SECOND TERM')) {
+    elseif(($_SESSION['semester'] =='SECOND TERM')) {
         $total2 =	$examscr + $catext ;
         	$query= mysqli_query($connection,"SELECT * FROM courseregister WHERE
          session='". $_SESSION['session']."' AND  faculty='". $_SESSION['faculty']."' AND dept='". $_SESSION['dept']."' 
-         AND level='".$_SESSION['level']."' AND course !='". $_SESSION['course']."' AND class='$levelR'");
+         AND level='".$_SESSION['level']."' AND course ='". $_SESSION['course']."' AND class='$levelR'");
        if(!$query){
         echo 'failed';
        }
        	while($row=mysqli_fetch_assoc($query)){
 	$totalt1=$row['first_term'];
          include "config.php";
-	 $update = "update courseregister set cascore='$catext',first_term='$totalt1',class='$levelR',second_term='$total2',examscore='$examscr' where courseRegId='$crd'";
+	 $update = "update courseregister set second_resusult_text='$catext',first_term='$totalt1',class='$levelR',second_term='$total2',
+     second_resusult_exam='$examscr' where courseRegId='$crd'";
     $result =mysqli_query($connection,$update);
 
     if (!$result){

@@ -96,9 +96,7 @@ $(document).ready(function() {
 });
 </script> 
     
-    
-    
-    
+   
     
 </head>
 <body style="background-color:whitesmoke; background-repeat: no-repeat;size: a4; background-image: url();size: a4;">

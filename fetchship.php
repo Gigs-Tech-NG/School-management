@@ -2,17 +2,18 @@
 <?php include("config.php"); ?>  
 <body>
 <?php 
-$faculty=$_POST['faculty'];
+
 
 if(isset($_POST['faculty'])){
-$query =$connection->query("SELECT * FROM depts WHERE faculty_id =".$_POST['faculty']."");
+    $faculty=$_POST['faculty'];
+$query =$connection->query("SELECT * FROM shipping_rate WHERE state_id ='$faculty'");
 $rowCount=$query->num_rows;
 
  if($rowCount > 0){
      echo '<option value="">select a programme</option>';
   while($row=$query->fetch_assoc()){ 
       
-   echo '<option value= "'.$row['id'].'">'.$row['name'].'</option>';
+   echo '<option value= "'.$row['id'].'">'.$row['rates'].'</option>';
  }
    }else{
      echo '<option value="">programme value not available </option>';
