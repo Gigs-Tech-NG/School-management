@@ -207,25 +207,29 @@ session_start();
         $pin=mysqli_real_escape_string($connection,$_POST['pin']);
                          // include "config.php";
                          //  $expired=2;
-                         $select="SELECT * FROM pincheck WHERE pin='$pin'";
+                           $emai=$_POST['mail'];
+                           $matripin=$_POST['matricpin'];
+                         $select="SELECT * FROM pincheck WHERE pin='$pin' AND email='$emai' AND matricNo='$matripin'";
                          $result=mysqli_query($connection,$select);
                          $expire=0;
                          
                     $expire=$expire + 1;
                          //$expired= $expire + $expire++;
-                         if(!$result){
-                             
-                         }while($row=mysqli_fetch_assoc($result)){
+                         
+                         ($row=mysqli_fetch_assoc($result));
                              $pinned=$row['pin'];
                              $xpire=$row['xpired'];
+                             $email=$row['email'];
                               $expired=$xpire + $expire++;
-                         }if(($pin == $pinned ) && ($xpire > 3)){
+                         if(($pin == $pinned ) && ($xpire > 3)){
                              return "Pin has already been used";
                          }
                          if(($pin == $pinned ) && ($xpire < 4)){
                               include "config.php";
-                             $update=mysqli_query($connection,"UPDATE pincheck SET xpired='$expired' WHERE pin='$pin'");
+                             $update=mysqli_query($connection,"UPDATE pincheck SET xpired='$expired' WHERE pin='$pin' AND email='$email' AND matricNo='$matripin'");
                             // echo "<script> location.href='CHECKResuts.php' </script>";
+                            // $_SESSION['LOGGEDpin']="true";
+                          // echo "<script> location.href='CHECKResuts.php' </script>";
                           if($update){
                               $_SESSION['LOGGEDpin']="true";
                            echo "<script> location.href='CHECKResuts.php' </script>";
@@ -233,7 +237,7 @@ session_start();
                            else{
                                // return "Invalid Pin";
                             // echo "<script> location.href='CHECKResuts.php' </script>";
-                         }
+                         } 
                          }
                         else{
                            return "Invalid Pin";
@@ -264,6 +268,8 @@ session_start();
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Pin  *</label>
                                     <input type="text" placeholder="Enter Pin"   name="pin" class="form-control" required>
+                                     <input type="hidden" placeholder="Enter Pin" value="<?php echo $email_val;?>"  name="mail" class="form-control" required>
+                                        <input type="hidden" placeholder="Enter Pin" value="<?php echo $matricNo;?>"  name="matricpin" class="form-control" required>
                                 </div>
                                 
                               
