@@ -30,14 +30,14 @@ session_start();
              include "config.php";
      if(isset($_POST['addcourse'])){
    
-    $coursecode=strtoupper(htmlspecialchars($_POST['coursecode']));
-   $semesterid=htmlspecialchars($_POST['semester']);
+   // $coursecode=strtoupper(htmlspecialchars($_POST['coursecode']));
+   $levelid=htmlspecialchars($_POST['level']);
    $courstitle=strtoupper(htmlspecialchars($_POST['coursetitle'])); 
-  // $creditunit=htmlspecialchars($_POST['creditunit']); 
+   $dept=htmlspecialchars($_POST['dept']); 
  //  $lectureday1=htmlspecialchars($_POST['lectureday1']);
   // $lectureday2=htmlspecialchars($_POST['lectureday2']);
    
-   $sel=mysqli_query($connection,"SELECT * FROM course WHERE name='$coursecode' AND semester_id = '$semesterid' 
+   $sel=mysqli_query($connection,"SELECT * FROM level WHERE name='$dept' AND dept_id = '$levelid' 
    AND coursetitle= '$courstitle'");
   $norow=mysqli_num_rows($sel);
    if($norow >=1) {
@@ -45,7 +45,7 @@ session_start();
    } else{
    
    $query=mysqli_query($connection,"INSERT INTO course(name,semester_id,coursetitle) 
-   VALUES('$coursecode','$semesterid','$courstitle')");
+   VALUES('$dept','$levelid','$courstitle')");
    if($query) {
      $success =$courstitle."(" . $coursecode .") inserted successfully";
    } else{
@@ -144,7 +144,7 @@ session_start();
             <div class="col-md-6">
                 <div class="form-group">
                      <label> TERM *</label>
-                                    <select class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12"  style=" height:50px;" id="semester" name="semester" required="required">
+                                    <select class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12"  style=" height:50px;" name="semester">
                                         <option value="">Select level first *</option> <div class="help-block with-errors"></div></select>
                 </div>
             </div></div>
@@ -152,7 +152,7 @@ session_start();
             <div class="col-md-6">
                 <div class="form-group">
                      <label>Subject(s) you have already entered for the selected data*</label>
-                                    <select class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12" disabled="disabled" multiple="multiple" style=" height:150px;" id="course">
+                                    <select class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12" disabled="disabled" multiple="multiple" style=" height:150px;" id="semester" >
                                         <option value="">Select level first *</option> <div class="help-block with-errors"></div></select>
                 </div>
             </div></div>

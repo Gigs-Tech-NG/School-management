@@ -248,6 +248,8 @@ if (time()-$_SESSION['timeout'] > 600){
         <td class='tblwidth'>
      <?php
        //$matricno=$_SESSION['matricNo'];
+        $leves=$_POST['class'];
+        $_SESSION['class']=$leves;
     $select_profile="SELECT * FROM application WHERE matricNo='$matricno'";
     $result=mysqli_query($connection,$select_profile);     
     if(!$result){
@@ -258,7 +260,7 @@ if (time()-$_SESSION['timeout'] > 600){
          echo "<P>".
         "<span class='stddetals'>FULL NAME: </span>"."<br/>".
         "<span class='stddetals'>MATRIC.NO: </span>  "."<br/>".
-        "<span class='stddetals'>DEPARTMENT:</span>  "."<br/>".  
+        "<span class='stddetals'>CLASS:</span>  "."<br/>".  
        "<span class='stddetals'>PROGRAMME:</span>  "."<br/>".
        "<span class='stddetals'>LEVEL: </span>  "."<br/>".
         
@@ -269,7 +271,7 @@ if (time()-$_SESSION['timeout'] > 600){
         " <span class='stddetals'>" .$name=$data['matricNo']."</span><br/>".
          " <span class='stddetals'>" .$name=$data['faculty']."</span><br/>".  
        " <span class='stddetals'>" .$name=$data['department']."</span><br/>".
-       " <span class='stddetals'>" .$name=$data['level']."</span><br/>".
+       " <span class='stddetals'>" .$_SESSION['class']."</span><br/>".
         
      " </td> ";
       echo "<br/>";
@@ -288,17 +290,15 @@ if (time()-$_SESSION['timeout'] > 600){
   <?php     
   if(isset($_POST['check'])){
   $term=' ';
-  //$leves=$_POST['level'];
+  $leves=$_POST['class'];
   
 $sql=mysqli_query($connection,"select  faculties.name as facultyname, courseregister.courseRegId as CRId, 
- depts.name  as deptname, level.name as levelname,
-semester.name as semestername, course.name as coursename,
+ depts.name  as deptname, level.name as levelname, course.name as coursename,
 course.coursetitle as coursetile, course.creditunit as creditunit, courseregister.*
 from  courseregister join faculties on faculties.id= courseregister.faculty 
 join depts on depts.id= courseregister.dept join level on level.id=courseregister.level 
-join semester on semester.id=courseregister.semester 
 join course on course.id=courseregister.course
- where  courseregister.matricno='".$_POST['matricno']."' AND courseregister.class='".$_POST['class']."' AND courseregister.third_term !='$term' AND courseregister.examscore !=0 AND courseregister.examscore !=''  AND courseregister.cascore !=0 AND courseregister.cascore !=''
+ where  courseregister.matricno='".$_POST['matricno']."' AND courseregister.class='".$_POST['class']."' AND courseregister.third_term !='$term'
   ");
  //$norow=mysqli_num_rows($sql);
    if(mysqli_num_rows($sql) == 0) {
@@ -308,7 +308,7 @@ join course on course.id=courseregister.course
                                     <thead>
                                         <tr>
                                             <th>S/N</th>
-                                                <th>COURSE CODE</th>
+                                            
                                                 <th>COURSE TITLE</th>
                                             
 
@@ -332,12 +332,21 @@ $sn=0;
 while($row=mysqli_fetch_array($sql))
 {  
    
-    $exam =htmlentities($row['examscore']);
-   $ca= htmlentities($row['cascore']);
+    $exam =htmlentities($row['third_resusult_exam']);
+   $ca= htmlentities($row['third_resusult_text']);
     $sfirst=$row['first_term'];
      $second=$row['second_term'];
       $thirdt=$row['third_term'];
-   $totallavverage=round((($sfirst + $second + $thirdt)/3),2);
+      if(($sfirst !='' && $second !='' && $thirdt !='') ){
+        $count=3;
+      }
+      elseif( (!empty($second) && !empty($thirdt) && $sfirst =='') or ((!empty($sfirst) && !empty($thirdt) && $second =='') )){
+        $count=2;
+      }
+      elseif($thirdt !='' && $sfirst =='' && $second ==''){
+        $count=1;
+      }
+   $totallavverage=round((($sfirst + $second + $thirdt)/$count),2);
 $sn =$sn + 1;     
 ?>
 
@@ -345,7 +354,7 @@ $sn =$sn + 1;
                                         <tr>
                                             <td><?php echo $sn;?></td>
                                              
-                                             <td><?php echo htmlentities($row['coursename']);?></td>
+                                             
                                               <td><?php echo htmlentities($row['coursetile']);?></td>
                                              
                                                <td><?php
@@ -384,7 +393,7 @@ $i=$sn-1;
                       <td></td>
                       <td></td>   <td><strong>TOTAL REGISTERED SUBJECTS:</strong></td>';
                       ?>
-                      <td><?php if(!(empty($i))){ echo $i ;} ?></td><td></td><td></td><td></td><td></td><td></td><td></td><td><?php echo "TOTAL:  ". $cgpa."%" ; ?></td> 
+                      <td><?php if(!(empty($i))){ echo $i ;} ?></td><td></td><td></td><td></td><td></td><td></td><td><?php echo "TOTAL:  ". $cgpa."%" ; ?></td> 
                     </tr>
       
                                     </tbody>

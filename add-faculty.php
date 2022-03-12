@@ -127,13 +127,14 @@ session_start();
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="form_message">PROGRAMME</label>
-              <select class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12" name="dept" >
-                <option value="">---SELECT----*</option>
+              <!---<select class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12" name="dept" >
+                <option value="">SELECT</option>
                 <option>JUNIOR CLASSES</option>
                  <option>ART CLASS</option>
                   <option>SCIENCS CLASS</option>
                    <option>COOMERCIAL CLASS</option>
-                 <div class="help-block with-errors"></div></select>          
+                 <div class="help-block with-errors"></div></select-->
+                 <input type="text"  class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12" name="dept" required>         
                         <div class="help-block with-errors"></div>
                 </div>
             </div>

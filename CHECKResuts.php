@@ -262,7 +262,8 @@ if (time()-$_SESSION['timeout'] > 600){
 print '<select name="session" class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12" style=" height:50px;">';
 echo ' <option  selected="selected">- Select current Session-</option>';  
 foreach (range(date('Y'), $earliest_year) as $x) {
-    print '<option value="'.$x.'"'.($x === $already_selected_value ? ' selected="selected"' : '').'>'.$x.'</option>';
+   print '<option value="'.($x-1).'/'.$x.'"'.($x === $already_selected_value ? ' selected="selected"' : '').'>'.($x-1).'/'.$x.'</option>';
+
 }
 print '</select>';
 ?> 
@@ -299,9 +300,12 @@ print '</select>';
                     <div class="help-block with-errors"></div>
                                 </div>
                                    <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>SEMESTER *</label>
-                             <select id="semester"  name="semester" class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12" style=" height:50px;" required>
+                                    <label>Term *</label>
+                             <select   name="semester" class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12" style=" height:50px;" required>
                     <option value="">Select level first </option>
+                    <option value="FIRST TERM">FIRST TERM </option>
+                    <option value="SECOND TERM">SECOND TERM  </option>
+                    <option value="THIRD TERM">THIRD TERM  </option>
                           </select> 
                        </div>
                            

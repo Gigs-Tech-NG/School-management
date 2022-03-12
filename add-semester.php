@@ -568,14 +568,14 @@ session_start();
                                         <option value="">Select programme first *</option> <div class="help-block with-errors"></div></select>
                 </div>
             </div></div>
-               <div class="row">
+              <!--- <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                      <label>AVAILABLE TERMS *</label>
-                                    <select class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12" disabled="disabled" multiple="multiple" style=" height:150px;" id="semester">
+                                    <select class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12" disabled="disabled" multiple="multiple" style=" height:150px;" id="dept">
                                         <option value="">Select level first *</option> <div class="help-block with-errors"></div></select>
                 </div>
-            </div></div>
+            </div></div--->
              <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
